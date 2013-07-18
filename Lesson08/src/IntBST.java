@@ -26,6 +26,33 @@ public class IntBST {
     public void insertValue(int value) {
         if (this.rootNode == null) {
             this.rootNode = new IntNode(value);
+        } else {
+            IntNode n = rootNode;
+            while (n.getValue() != value) {
+                if (value < n.getValue()) {
+                    if (n.getLeftChild() == null) {
+                        n.setLeftChild(new IntNode(value));
+                    }
+                    n = n.getLeftChild();
+                } else if (value > n.getValue()) {
+                    if (n.getRightChild() == null) {
+                        n.setRightChild(new IntNode(value));
+                    }
+                    n = n.getRightChild();
+                } else if (value == n.getValue()) {
+                    throw new UnsupportedOperationException("This value already exists!");
+                } else {
+                    //case where root is not defined yet
+                    //rootNode = new IntNode(value);
+                }
+            }
+        }
+    }
+
+
+    public void insertValue_CRAZEE(int value) {
+        if (this.rootNode == null) {
+            this.rootNode = new IntNode(value);
         } else if (this.rootNode.getValue() < value) {
             if (rootNode.getRightChild() == null) {
                 rootNode.setRightChild(new IntNode(value));
@@ -34,7 +61,7 @@ public class IntBST {
                 while (!(next_node.getLeftChild() == null && next_node.getRightChild() == null)) {
                     if (next_node.getValue() < value) {
                         if (!(next_node.getRightChild() == null)) {
-                            //next_node = next_node.getRightChild();
+                            next_node = next_node.getRightChild();
                         } else {
                             next_node.setRightChild(new IntNode(value));
                             next_node = next_node.getRightChild();
