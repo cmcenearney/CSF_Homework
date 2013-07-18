@@ -1,3 +1,6 @@
+// change queue to stack in print method to do different traversal
+// check the slides!
+
 import java.util.LinkedList;
 
 
@@ -7,9 +10,9 @@ public class IntBST {
     public void printTree() {
         LinkedList<IntNode> queue = new LinkedList<IntNode>();
         queue.add(rootNode);
-        System.out.print("BFS of BST:" );
+        System.out.print("BFS of BST:");
 
-        while(!queue.isEmpty()) {
+        while (!queue.isEmpty()) {
             IntNode node = queue.remove();
             System.out.print(node.getValue() + " ");
 
@@ -21,13 +24,72 @@ public class IntBST {
     }
 
     public void insertValue(int value) {
+        if (this.rootNode == null) {
+            this.rootNode = new IntNode(value);
+        } else if (this.rootNode.getValue() < value) {
+            if (rootNode.getRightChild() == null) {
+                rootNode.setRightChild(new IntNode(value));
+            } else {
+                IntNode next_node = rootNode.getRightChild();
+                while (!(next_node.getLeftChild() == null && next_node.getRightChild() == null)) {
+                    if (next_node.getValue() < value) {
+                        if (!(next_node.getRightChild() == null)) {
+                            //next_node = next_node.getRightChild();
+                        } else {
+                            next_node.setRightChild(new IntNode(value));
+                            next_node = next_node.getRightChild();
+                        }
+
+                    } else if (next_node.getValue() > value) {
+                        if (!(next_node.getLeftChild() == null)) {
+                            next_node = next_node.getLeftChild();
+                        } else {
+                            next_node.setLeftChild(new IntNode(value));
+                            next_node = next_node.getLeftChild();
+                        }
+                    } else {
+                        //There are duplicates in input!!!!!
+                        throw new UnsupportedOperationException("This value already exists!");
+                    }
+                }
+                // if we got here  we are done - we have added the value and its node has no children
+            }
+        } else if (this.rootNode.getValue() > value) {
+            if (rootNode.getLeftChild() == null) {
+                rootNode.setLeftChild(new IntNode(value));
+            } else {
+                IntNode next_node = rootNode.getLeftChild();
+                while ((next_node.getLeftChild() != null && next_node.getRightChild() != null)) {
+                    if (next_node.getValue() < value) {
+                        if (!(next_node.getRightChild() == null)) {
+                            next_node = next_node.getRightChild();
+                        } else {
+                            next_node.setRightChild(new IntNode(value));
+                            next_node = next_node.getRightChild();
+                        }
+
+                    } else if (next_node.getValue() > value) {
+                        if (!(next_node.getLeftChild() == null)) {
+                            next_node = next_node.getLeftChild();
+                        } else {
+                            next_node.setLeftChild(new IntNode(value));
+                            next_node = next_node.getLeftChild();
+                        }
+                    } else {
+                        //There are duplicates in input!!!!!
+                        throw new UnsupportedOperationException("This value already exists!");
+                    }
+                }
+                // if we got here  we are done - we have added the value and its node has no children
+            }
+        }
         // TODO: Implement insert value for a binary search tree
-        throw new UnsupportedOperationException("Not implemented!");
+        //throw new UnsupportedOperationException("Not implemented!");
     }
 
     public boolean search(int value) {
         // TODO: Implement search for a value for a binary search tree
-        throw new UnsupportedOperationException("Not implemented!");
+        //throw new UnsupportedOperationException("Not implemented!");
         return false;
     }
 

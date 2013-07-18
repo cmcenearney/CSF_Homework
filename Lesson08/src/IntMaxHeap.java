@@ -9,7 +9,7 @@ public class IntMaxHeap {
 
     public void insertValue(int value) {
         // When you want to test this method, remove the 'throw' line below
-        throw new UnsupportedOperationException("Not implemented!");
+        //throw new UnsupportedOperationException("Not implemented!");
 
         // Add to the end of the array
         array.add(new Integer(value));
