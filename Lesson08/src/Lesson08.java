@@ -21,15 +21,10 @@ binary search tree
     - frequent searches
     - data changes frequently
 
-
+sets
+----
+collection of *unique* values
 
  */
 
-import java.util.Scanner;
 
-public class Lesson08 {
-    public static void main (String[] args){
-
-
-    }
-}
