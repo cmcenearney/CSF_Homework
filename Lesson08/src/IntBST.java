@@ -65,9 +65,6 @@ public class IntBST {
                     n = n.getRightChild();
                 } else if (value == n.getValue()) {
                     throw new UnsupportedOperationException("This value already exists!");
-                } else {
-                    //case where root is not defined yet
-                    //rootNode = new IntNode(value);
                 }
             }
         }
