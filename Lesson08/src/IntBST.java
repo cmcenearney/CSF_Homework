@@ -1,5 +1,5 @@
-// change queue to stack in print method to do different traversal
-// check the slides!
+// TODO: try changing queue to stack in print method to do different traversal
+// check the slides for more info
 
 import java.util.LinkedList;
 import java.util.ArrayList;
@@ -20,6 +20,30 @@ public class IntBST {
                 queue.add(node.getLeftChild());
             if (node.getRightChild() != null)
                 queue.add(node.getRightChild());
+        }
+    }
+
+    public int countChildren(IntNode n){
+        int cnt;
+        if (n.getLeftChild() == null && n.getRightChild() == null)  {
+            cnt = 0;
+            return cnt;
+        }
+        else if (n.getLeftChild() != null && n.getRightChild() != null) {
+            cnt = countChildren(n.getLeftChild()) + countChildren(n.getRightChild());
+            return cnt;
+        }
+        else if (n.getLeftChild() == null && n.getRightChild() != null) {
+            cnt = countChildren(n.getRightChild());
+            return cnt;
+        }
+        else if (n.getLeftChild() != null && n.getRightChild() == null) {
+            cnt = countChildren(n.getLeftChild());
+            return cnt;
+        }
+        else {
+            cnt = 0;
+            return cnt;
         }
     }
 
@@ -118,6 +142,18 @@ public class IntBST {
             parent.setRightChild(null);
         }
     }
+
+    public void replaceNode(IntNode n, IntNode rep) {
+        IntNode parent = n.getParent();
+        if (n == parent.getLeftChild()){
+            parent.setLeftChild(rep);
+        }
+        else {
+            parent.setRightChild(rep);
+        }
+        simpleRemove(n);
+    }
+
     public void remove(int value) {
         // TODO: Optional Challenge HW Question for next Monday
         // To remove, first examine the find the node, then:
@@ -133,17 +169,23 @@ public class IntBST {
             }
             //case 3
             else if (n.getLeftChild() != null  && n.getRightChild() != null) {
-
+                 // decide by counting ? this might help keep tree more balanced
+                if ( countChildren(n.getLeftChild()) > countChildren(n.getRightChild()) ) {
+                    replaceNode(n, n.getLeftChild());
+                }
+                else {
+                    replaceNode(n, n.getRightChild());
+                }
             }
             // case 2
             else if (n.getLeftChild() != null  || n.getRightChild() != null) {
                 if (n.getLeftChild() != null) {
-                    parent.setLeftChild(n.getLeftChild());
-                    simpleRemove(n);
+                    // n has only left child, so attach parent to n's left child
+                    replaceNode(n, n.getLeftChild());
                 }
                 else if (n.getRightChild() != null) {
-                    parent.setRightChild(n.getRightChild());
-                    simpleRemove(n);
+                    // n has only right child, so attach parent to n's right child
+                    replaceNode(n, n.getRightChild());
                 }
             }
         }

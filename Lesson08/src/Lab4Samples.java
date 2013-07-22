@@ -23,7 +23,7 @@ public class Lab4Samples {
 
         while(true) {
             Scanner consoleScanner = new Scanner(System.in);
-            System.out.print("\nType 'insert {number}' or bulk {n1,n2,n3...} or 'find {number} to insert/find into the BST: ");
+            System.out.print("\nType 'insert {n}' or 'bulk {n1,n2,n3...}' or 'find {n}' or 'remove {n}' or 'countChildren {n}' to insert/find into the BST: ");
             String command = consoleScanner.next();
             //int value = consoleScanner.nextInt();
 
@@ -39,6 +39,21 @@ public class Lab4Samples {
             else if (command.equals("bulk")) {
                 String bulk_add = consoleScanner.next();
                 bst.bulkAdd(bulk_add);
+                bst.printTree();
+            }
+            else if (command.equals("remove")) {
+                int value = consoleScanner.nextInt();
+                bst.remove(value);
+                bst.printTree();
+            }
+            else if (command.equals("countChildren")) {
+                int value = consoleScanner.nextInt();
+                if ( bst.search(value) ){
+                   System.out.println(value + " has " + bst.countChildren(bst.find(value)) + " children.");
+                }
+                else {
+                    System.out.println(value + " not found.");
+                }
                 bst.printTree();
             }
         }
