@@ -28,7 +28,7 @@ graphs
 ------
  models
  no data in edges:
-    - adjacency list - list of N nodes, where each node has a list of nodes that it's is connected to
+    - adjacency list - list of N nodes, where each node has a list of nodes that it's connected to
     - adjacency matrix
 
  data in edges:

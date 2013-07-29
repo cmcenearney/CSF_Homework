@@ -6,6 +6,7 @@ import java.util.Collection;
 import static org.junit.Assert.*;
 
 public class SimpleHashMapTest {
+
     private SimpleHashMap hashMap;
 
     @Before

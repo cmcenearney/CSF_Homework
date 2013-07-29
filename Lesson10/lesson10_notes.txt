@@ -1,0 +1,23 @@
+Algorithms
+==========
+
+
+memoization 
+  - using more memory to reduce number of computations
+
+greedy algorithms
+  - at each step, tries to make a locally optimal choice
+  - 'greedy' because they have no knowledge of the big picture, they only choose what's best for them, in the moment!
+  - usually not the *best* solution
+    - they are short-sighted
+    - also non-recoverable
+    but, 
+      - also frequently simple and fast
+
+
+
+HOMEWORK
+========
+
+- get all the CoinCounter tests passing
+- optional: look at the Lesson 09 code

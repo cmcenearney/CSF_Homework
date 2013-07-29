@@ -8,6 +8,7 @@ public class TextGeneratorApplication {
         String filename = "casablanca.txt";
 
         try {
+            //System.out.println("hi, this is running - you just need to do some work");
             s = new Scanner(new BufferedReader(new FileReader(filename)));
             NGramTextGenerator generator = new NGramTextGenerator(); 
             while (s.hasNext()) {

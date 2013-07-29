@@ -52,7 +52,8 @@ public class CoinCounterTest {
     @Test
     public void testNumberOfCoinsRequired() throws Exception {
         for (int i = 0; i < 100; i++) {
-            assertEquals(americanDenominations.numberOfCoinsRequired(i), americanDenominations.simpleNumberOfCoinsRequired(i));
+            //String failure_str = String(i);
+            assertEquals("failing for i=" + i, americanDenominations.simpleNumberOfCoinsRequired(i), americanDenominations.numberOfCoinsRequired(i));
         }
     }
 

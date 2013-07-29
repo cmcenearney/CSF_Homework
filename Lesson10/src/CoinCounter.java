@@ -22,6 +22,17 @@ public class CoinCounter {
         Arrays.sort(this.denominations);
     }
 
+    public int findBiggestCoin(int[] denominations, int value) {
+        int r = 0;
+        for (int i = denominations.length -1; i >= 0; i-- ) {
+            if (value >= denominations[i]) {
+                r = denominations[i] ;
+                break;
+            }
+        }
+        return r;
+    }
+
     /**
      * Returns the number of coins required to make change for a given value.
      *
@@ -30,6 +41,7 @@ public class CoinCounter {
      * @param totalSum The total value in coins that must be made change for.
      * @return The total number of coins that are needed to make change for totalSum.
      */
+
     public int simpleNumberOfCoinsRequired(int totalSum) {
         /*
             To calculate the number of coins required to give change in
@@ -50,9 +62,15 @@ public class CoinCounter {
                 * Repeat.
 
             Assignment: Implement this algorithm below and make testSimpleNumberOfCoinsRequired pass.
-         */
+        */
 
-        throw new NotImplementedException();
+        int counter = 0;
+        while (totalSum > 0) {
+            totalSum = totalSum - findBiggestCoin(denominations, totalSum);
+            counter ++;
+        }
+        //throw new NotImplementedException();
+        return counter;
     }
 
     /**
@@ -89,16 +107,39 @@ public class CoinCounter {
             Third assignment: Make testTerribleDenominations pass
          */
 
-        throw new NotImplementedException();
-
-        // Instructor sample soln: Remove before giving to students:
-        // Speed, O(m * n), m = totalSum, n = number of coins
-        /*int[] numberOfCoinsRequiredAtValue = new int[totalSum + 1];
-
-        for (int i = 1; i < numberOfCoinsRequiredAtValue.length; i++) {
-            // TODO
+        int[] numberOfCoinsRequiredAtValue = new int[totalSum + 1];
+        if (totalSum == 0){
+            return 0;
+        }
+        for (int i = 1; i <= totalSum; i++) {
+            if (inDenominations(denominations,i) ) {
+                numberOfCoinsRequiredAtValue[i] = 1;
+            }
+            else {
+                // for each coin that is less than i
+                // look at it's array[i] and pick the smallest
+                int max = CHANGE_NOT_POSSIBLE_FLAG - 1;
+                for (int d : denominations) {
+                    if (d < i ) {
+                        if (numberOfCoinsRequiredAtValue[i - d] < max ) {
+                            max = numberOfCoinsRequiredAtValue[i - d];
+                        }
+                    }
+                }
+                numberOfCoinsRequiredAtValue[i] = max + 1;
+            }
         }
 
-        return numberOfCoinsRequiredAtValue[totalSum];*/
+        return numberOfCoinsRequiredAtValue[totalSum];
     }
+    public boolean inDenominations(int[]denominations, int value) {
+        for (int d : denominations) {
+            if (d == value){
+            return true;
+            }
+        }
+        return false;
+    }
+
+
 }

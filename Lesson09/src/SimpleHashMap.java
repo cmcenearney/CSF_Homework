@@ -18,12 +18,15 @@ public class SimpleHashMap
         this.dataStore = new ArrayList<LinkedList<KeyValueTuple>>(capacity);
         this.dataStore.ensureCapacity(capacity);
         this.capacity = capacity;
-        for (int i = 0; i < capacity; i++){
 
+        for (int i = 0; i < capacity; i++){
+            LinkedList<KeyValueTuple> empty_list = new LinkedList<KeyValueTuple>();
+            this.dataStore.add(i, empty_list);
         }
+
     }
 
-    public Object put(Object value, String key)
+    public Object put(String key, Object value)
     {
         // TODO:
         // * Get the hash value of the key
@@ -31,14 +34,15 @@ public class SimpleHashMap
         // * If something in that spot already exists, add it at the end of the linked list
         // * Return the value
         int hash = key.hashCode();
-        int index = hash % this.capacity;
+        int index = Math.abs(hash % this.capacity);
         KeyValueTuple tuple = new KeyValueTuple();
         tuple.value = value;
         tuple.key = key;
+        /*
         if (dataStore.get(index) != null) {
-            dataStore.add(index, new LinkedList<KeyValueTuple>());
+            dataStore.set(index, new LinkedList<KeyValueTuple>());
         }
-
+          */
         dataStore.get(index).add(tuple);
 
         return value;
@@ -50,7 +54,8 @@ public class SimpleHashMap
         // * Get the hash value of the key
         // * Look for the desired key in the LinkedList at the appropriate index
         // * Return the value
-        LinkedList<KeyValueTuple> list = dataStore.get(key.hashCode());
+        int index = Math.abs(key.hashCode() % this.capacity);
+        LinkedList<KeyValueTuple> list = dataStore.get(index);
         //KeyValueTuple x = list.getFirst();
         for (KeyValueTuple t : list) {
             if (t.key == key){
@@ -66,6 +71,15 @@ public class SimpleHashMap
         // * Get the hash value of the key
         // * Remove the key/value tuple in the linked list at the appropriate index in the data store
         // * Return the value
+        int index = Math.abs(key.hashCode() % this.capacity);
+        LinkedList<KeyValueTuple> list = dataStore.get(index);
+        for (KeyValueTuple t : list) {
+            if (t.key == key){
+                Object val =  t.value;
+                list.remove(t);
+                return val;
+            }
+        }
         return null;
     }
 
@@ -108,7 +122,7 @@ public class SimpleHashMap
         {
             for (KeyValueTuple keyValueTuple : keysAndValues)
             {
-                values.add(keyValueTuple.key);
+                values.add(keyValueTuple.value);
             }
         }
         return values;

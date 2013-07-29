@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Set;
 
 public class NGramTextGenerator {
+
     private HashMap<LinkedList<String>, ArrayList<String>> ngrams;
     private LinkedList<String> currentNGram;
     private final Random random;
