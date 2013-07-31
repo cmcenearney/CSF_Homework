@@ -64,6 +64,7 @@ public class CoinCounter {
             Assignment: Implement this algorithm below and make testSimpleNumberOfCoinsRequired pass.
         */
 
+<<<<<<< HEAD
         int counter = 0;
         while (totalSum > 0) {
             totalSum = totalSum - findBiggestCoin(denominations, totalSum);
@@ -71,6 +72,25 @@ public class CoinCounter {
         }
         //throw new NotImplementedException();
         return counter;
+=======
+        throw new NotImplementedException();
+
+        int count = 0;
+        int denominationIndex = this.denominations.length - 1;
+        while (totalSum > 0) {
+            if (this.denominations[denominationIndex] <= totalSum) {
+                count += Math.floor(totalSum/this.denominations[denominationIndex]);
+                totalSum %= this.denominations[denominationIndex];
+            } else {
+                denominationIndex--;
+
+                if (denominationIndex < 0)
+                    break;
+            }
+        }
+
+        return totalSum == 0 ? count : CHANGE_NOT_POSSIBLE_FLAG;
+>>>>>>> upstream/master
     }
 
     /**
@@ -107,6 +127,7 @@ public class CoinCounter {
             Third assignment: Make testTerribleDenominations pass
          */
 
+<<<<<<< HEAD
         int[] numberOfCoinsRequiredAtValue = new int[totalSum + 1];
         if (totalSum == 0){
             return 0;
@@ -139,6 +160,31 @@ public class CoinCounter {
             }
         }
         return false;
+=======
+        throw new NotImplementedException();
+
+        // Instructor sample soln: Remove before giving to students:
+        // Speed, O(m * n), m = totalSum, n = number of coins
+        int[] numberOfCoinsRequiredAtValue = new int[totalSum + 1];
+
+        for (int i = 1; i < numberOfCoinsRequiredAtValue.length; i++) {
+            int minimumPreviousValue = CHANGE_NOT_POSSIBLE_FLAG;
+            for (int coinValue : this.denominations) {
+                if (coinValue == i) {
+                    minimumPreviousValue = 1;
+                    break;
+                } else if (coinValue < totalSum && i - coinValue > 0) {
+                    int value = numberOfCoinsRequiredAtValue[i - coinValue];
+                    if (value != CHANGE_NOT_POSSIBLE_FLAG)
+                        minimumPreviousValue = Math.min(minimumPreviousValue, value + 1);
+                } else
+                    break;
+            }
+            numberOfCoinsRequiredAtValue[i] = minimumPreviousValue;
+        }
+
+        return numberOfCoinsRequiredAtValue[totalSum];
+>>>>>>> upstream/master
     }
 
 

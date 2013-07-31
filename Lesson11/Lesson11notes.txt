@@ -1,0 +1,12 @@
+Lesson 11 notes
+===============
+
+- simple graph
+  - no paths that loop back (node <> self)
+  - no nodes connected by multiple paths (a<>b , b<>a)
+
+- sparse / dense
+- cyclic / acyclic
+- embedded , topological
+  - has coordinates
+

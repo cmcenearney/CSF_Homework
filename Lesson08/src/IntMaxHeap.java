@@ -9,9 +9,16 @@ public class IntMaxHeap {
 
     public void insertValue(int value) {
         // When you want to test this method, remove the 'throw' line below
+<<<<<<< HEAD
         //throw new UnsupportedOperationException("Not implemented!");
+=======
+//        throw new UnsupportedOperationException("Not implemented!");
+>>>>>>> upstream/master
 
         // Add to the end of the array
+        // Note: The Integer class is an Object wrapper around an int that makes it storable in
+        //  Java's collection classes
+        // To get an int from an Integer intInstance, call intInstance.intValue() 
         array.add(new Integer(value));
 
         if (array.size() > 1)
@@ -23,6 +30,20 @@ public class IntMaxHeap {
             //  E.g. If a child node is at index 10 in the array, 
             //  its parent node is at position (10-1)/2, which is 4 (integer division rounds down)
 
+            // Solution code:
+            int index = array.size() - 1;
+            int parentIndex = (index - 1)/2;
+            int parentValue =  array.get(parentIndex).intValue();
+
+            while (value > parentValue) {
+                // Swap parent value and new value
+                array.set(index, new Integer(parentValue));
+                array.set(parentIndex, new Integer(value));
+
+                index = parentIndex;
+                parentIndex = (index - 1)/2;
+                parentValue =  array.get(parentIndex).intValue();
+            }
         }
     }
 
