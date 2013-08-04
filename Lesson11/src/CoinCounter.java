@@ -51,7 +51,9 @@ public class CoinCounter {
                  * Repeat
                 * Return the calculated value for totalSum
 
-            A sample solution:
+            First assignment: Make testNumberOfCoinsRequired pass
+            Second assignment: Make testWonderlandDenominations pass
+            Third assignment: Make testTerribleDenominations pass
          */
 
         // Speed, O(m * n), m = totalSum, n = number of coins
@@ -97,6 +99,7 @@ public class CoinCounter {
             return CHANGE_NOT_POSSIBLE_FLAG;
         }
 
+<<<<<<< HEAD
         int best_denom = -1; //random for starters
         int result_tester = totalSum; // no result will be higher than totalSum
         for (int d : denominations){
@@ -124,5 +127,30 @@ public class CoinCounter {
     }
     public boolean impossible(int n){
         return lessThanSmallest(n % denominations[0]);
+=======
+//        throw new NotImplementedException();
+
+        // Instructor sample soln:
+        if (totalSum == 0) {
+            return 0;
+        }
+        else if (Arrays.binarySearch(this.denominations, totalSum) >= 0) {
+            return 1;
+        }
+        else if (totalSum < 0) {
+            return CHANGE_NOT_POSSIBLE_FLAG;
+        }
+
+        int lowestChild = CHANGE_NOT_POSSIBLE_FLAG;
+
+        for (int denomination : this.denominations) {
+            int result = recursiveNumberOfCoinsRequired(totalSum - denomination);
+            if (result < lowestChild) {
+                lowestChild = result;
+            }
+        }
+
+        return lowestChild == CHANGE_NOT_POSSIBLE_FLAG ? lowestChild : lowestChild + 1;
+>>>>>>> upstream/master
     }
 }

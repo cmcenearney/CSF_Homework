@@ -1,7 +1,10 @@
+<<<<<<< HEAD
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.HashMap;
 
+=======
+>>>>>>> upstream/master
 public class FibSequence {
     /**
      * Returns the nth fibonacci number, recursively computed.
@@ -50,6 +53,7 @@ public class FibSequence {
         return numbers[n];
     }
 
+<<<<<<< HEAD
     public static int fibRecursive (int n) {
         if (n == 1) {
             return 1;
@@ -58,6 +62,16 @@ public class FibSequence {
             return 0;
         }
         return fibRecursive(n - 1) + fibRecursive(n - 2);
+=======
+        // Instructor sample soln:
+        if (n == 0) {
+            return 0;
+        }
+        else if (n == 1) {
+            return 1;
+        }
+        return fibNumber(n - 1) + fibNumber(n - 2);
+>>>>>>> upstream/master
     }
 
 }

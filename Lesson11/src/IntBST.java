@@ -1,5 +1,9 @@
 import java.util.LinkedList;
 import java.util.Scanner;
+<<<<<<< HEAD
+=======
+
+>>>>>>> upstream/master
 
 public class IntBST {
 
@@ -28,6 +32,7 @@ public class IntBST {
         }
     }
 
+<<<<<<< HEAD
     public void bulkAdd (String csv) {
         //ArrayList<String> values = new ArrayList();
         String[] values = csv.split(",");
@@ -37,6 +42,8 @@ public class IntBST {
         }
     }
 
+=======
+>>>>>>> upstream/master
     public void printBFS() {
         // TODO: Implement a BFS of a tree using a queue
         System.out.print("BFS of BST:" );

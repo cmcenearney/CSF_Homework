@@ -12,9 +12,9 @@ public class Domino {
 	 * @param val1 The numeric value of one end of the domino.
 	 * @param val2 The numeric value of the other end of the domino.
 	 */
-	public void domino(int val1, int val2) {
+	public Domino(int val1, int val2) {
 		if (val1 < 1 || val1 > 6 || val2 < 1 || val2 > 6) {
-			throw new IllegalArgumentException("Domino values range from 1-6");
+			throw new IllegalArgumentException("Domino values must range from 1-6 val1: " + val1 + " val2: " + val2);
 		}
 		
 		value1 = val1;
@@ -38,7 +38,16 @@ public class Domino {
 	public int getValue2() {
 		return value2;
 	}
-	
+
+    public int getFreeValue() {
+        if (freeValue == 1){
+            return value1;
+        }
+        else {
+            return value2;
+        }
+    }
+
 	/**
 	 * Marks this domino as being played, in a specific orientation.
 	 * @param value The end number that was matched against another domino.
@@ -82,7 +91,7 @@ public class Domino {
 	 * @return True if this domino is matched with this domino, if false if it could not be matched.
 	 */
 	public boolean match(Domino d) {
-		if (!d.GetFree()) {
+		if (!d.getFree()) {
 			return false;
 		}
 		
@@ -91,11 +100,11 @@ public class Domino {
 		}
 		
 		if (freeValue == 1) {
-			if (d.GetValue1() == value1) {
-				d.Play(1);
+			if (d.getValue1() == value1) {
+				d.play(1);
 				return true;
-			} else if (d.GetValue2() == value1) {
-				d.Play(2);
+			} else if (d.getValue2() == value1) {
+				d.play(2);
 				return true;
 			}
 		}
@@ -112,5 +121,24 @@ public class Domino {
 		
 		return false;
 	}
+
+
+    /**
+     * returns string represntation of domino {playedValue} | {notPlayedValue}
+     * if neither value is played then string is single-quoted
+     */
+    public String printableOutput() {
+        String output;
+        if (freeValue == 1) {
+            output = Integer.toString(value2) + "|" + Integer.toString(value1);
+        }
+        else if (freeValue == 2){
+            output = Integer.toString(value1) + "|" + Integer.toString(value2);
+        }
+        else {
+            output = "'" + Integer.toString(value2)  + "|" +  Integer.toString(value1) + "'";
+        }
+        return output;
+    }
 
 }
